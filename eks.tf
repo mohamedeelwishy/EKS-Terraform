@@ -1,6 +1,5 @@
-###############################################################################
-# eks.tf — EKS control plane, managed node group, IAM user + Access Entries
-###############################################################################
+
+# EKS control plane, managed node group, IAM user + Access Entries
 
 data "aws_caller_identity" "current" {}
 
@@ -17,7 +16,7 @@ module "eks" {
   cluster_endpoint_public_access_cidrs = var.cluster_endpoint_public_access_cidrs
   cluster_endpoint_private_access      = true
 
-  # --- OIDC / IRSA ----------------------------------------------------------
+  # --- OIDC / IRSA 
   # Creates the IAM OIDC identity provider for the cluster so ServiceAccounts
   # can assume IAM roles (IRSA) instead of using node instance profiles.
   enable_irsa = true

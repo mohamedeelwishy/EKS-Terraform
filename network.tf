@@ -1,6 +1,6 @@
-###############################################################################
-# network.tf — VPC, subnets, NAT gateway, Kubernetes discovery tags
-###############################################################################
+
+ VPC, subnets, NAT gateway, Kubernetes discovery tags
+
 
 data "aws_availability_zones" "available" {
   state = "available"
@@ -33,7 +33,7 @@ module "vpc" {
 
   # One NAT gateway shared by both private subnets — cheap, fine for dev.
   # For production set single_nat_gateway = false (one NAT per AZ) so an AZ
-  # outage can't take egress down for the whole cluster.
+  
   enable_nat_gateway = true
   single_nat_gateway = true
 

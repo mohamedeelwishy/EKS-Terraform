@@ -1,9 +1,5 @@
-###############################################################################
-# variables.tf — input variables + shared locals
-###############################################################################
-
 variable "region" {
-  description = "AWS region to deploy into."
+  description = "AWS region"
   type        = string
   default     = "eu-west-1"
 }
@@ -11,19 +7,19 @@ variable "region" {
 variable "project_name" {
   description = "Short name used as a prefix for all resource names."
   type        = string
-  default     = "demo"
+  default     = "eks-terraform"
 }
 
 variable "environment" {
   description = "Environment name (dev/staging/prod). Used in tags."
   type        = string
-  default     = "dev"
+  default     = "prod"
 }
 
 variable "cluster_name" {
   description = "Name of the EKS cluster."
   type        = string
-  default     = "demo-eks"
+  default     = "eks-prod-cluster"
 }
 
 variable "kubernetes_version" {
@@ -102,5 +98,6 @@ locals {
     Project     = var.project_name
     Environment = var.environment
     ManagedBy   = "terraform"
+    Owner       = "Mohamed Elwishy"
   }
 }

@@ -1,6 +1,6 @@
-###############################################################################
-# providers.tf — Terraform settings + provider configuration
-###############################################################################
+
+#Terraform settings + provider configuration
+
 
 terraform {
   required_version = ">= 1.5.0"
