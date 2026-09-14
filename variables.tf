@@ -25,7 +25,7 @@ variable "cluster_name" {
 variable "kubernetes_version" {
   description = "Kubernetes control-plane version for EKS."
   type        = string
-  default     = "1.31"
+  default     = "1.35"
 }
 
 variable "vpc_cidr" {
@@ -87,9 +87,9 @@ variable "namespaces" {
   default     = ["frontend", "backend"]
 }
 
-###############################################################################
+
 # Locals
-###############################################################################
+
 
 locals {
   name = "${var.project_name}-${var.environment}"

@@ -21,7 +21,7 @@ module "eks" {
   # can assume IAM roles (IRSA) instead of using node instance profiles.
   enable_irsa = true
 
-  # --- Authentication mode --------------------------------------------------
+  # Authentication mode
   # "API" = EKS Access Entries ONLY. The legacy aws-auth ConfigMap is not
   # created or consulted at all. ("API_AND_CONFIG_MAP" would keep both.)
   authentication_mode = "API"
@@ -33,7 +33,7 @@ module "eks" {
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.private_subnets # worker nodes live in private subnets
 
-  # --- Core addons ----------------------------------------------------------
+  # addons
   cluster_addons = {
     # vpc-cni must exist before nodes join, hence before_compute.
     vpc-cni = {
@@ -79,9 +79,8 @@ module "eks" {
   tags = local.tags
 }
 
-###############################################################################
+
 # IAM user "omar"
-###############################################################################
 
 resource "aws_iam_user" "cluster_admin" {
   name = var.cluster_admin_user_name
@@ -121,9 +120,8 @@ resource "aws_iam_user_policy_attachment" "cluster_admin_describe" {
   policy_arn = aws_iam_policy.eks_describe.arn
 }
 
-###############################################################################
+
 # EKS Access Entries (the modern replacement for the aws-auth ConfigMap)
-###############################################################################
 
 # Step 1: register the IAM principal with the cluster.
 resource "aws_eks_access_entry" "cluster_admin" {

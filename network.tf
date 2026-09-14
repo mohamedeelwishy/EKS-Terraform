@@ -1,5 +1,5 @@
 
- VPC, subnets, NAT gateway, Kubernetes discovery tags
+ #VPC, subnets, NAT gateway, Kubernetes discovery tags
 
 
 data "aws_availability_zones" "available" {
@@ -30,27 +30,21 @@ module "vpc" {
   azs             = local.azs
   private_subnets = local.private_subnets
   public_subnets  = local.public_subnets
-
-  # One NAT gateway shared by both private subnets — cheap, fine for dev.
-  # For production set single_nat_gateway = false (one NAT per AZ) so an AZ
   
   enable_nat_gateway = true
   single_nat_gateway = true
 
-  # Required by the EKS VPC CNI and by private-hosted-zone resolution.
+ 
   enable_dns_hostnames = true
   enable_dns_support   = true
 
-  # --- Kubernetes subnet discovery tags -------------------------------------
-  # The AWS cloud controller / load balancer controller reads these tags to
-  # decide where to place ELBs. Without them, `type: LoadBalancer` services
-  # stay stuck in <pending>.
+  # Kubernetes subnet tags 
   public_subnet_tags = {
-    "kubernetes.io/role/elb" = 1 # internet-facing load balancers land here
+    "kubernetes.io/role/elb" = 1 
   }
 
   private_subnet_tags = {
-    "kubernetes.io/role/internal-elb" = 1 # internal load balancers land here
+    "kubernetes.io/role/internal-elb" = 1 
   }
 
   tags = local.tags

@@ -1,13 +1,12 @@
-###############################################################################
+
 # outputs.tf
-###############################################################################
 
 output "region" {
   description = "AWS region the infrastructure lives in."
   value       = var.region
 }
 
-# --- Network -----------------------------------------------------------------
+#  Network 
 
 output "vpc_id" {
   description = "ID of the created VPC."
@@ -24,7 +23,7 @@ output "public_subnet_ids" {
   value       = module.vpc.public_subnets
 }
 
-# --- Cluster -----------------------------------------------------------------
+#  Cluster 
 
 output "cluster_name" {
   description = "Name of the EKS cluster."
@@ -48,7 +47,7 @@ output "cluster_security_group_id" {
 }
 
 output "oidc_provider_arn" {
-  description = "ARN of the IAM OIDC provider — use this for IRSA trust policies."
+  description = "ARN of the IAM OIDC provider - use this for IRSA trust policies."
   value       = module.eks.oidc_provider_arn
 }
 

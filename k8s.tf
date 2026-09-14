@@ -1,8 +1,5 @@
-###############################################################################
-# k8s.tf — Namespaces, a sample workload, and an NLB-backed Service
-###############################################################################
-
 # Namespaces: frontend + backend
+
 resource "kubernetes_namespace" "app" {
   for_each = toset(var.namespaces)
 
@@ -20,11 +17,10 @@ resource "kubernetes_namespace" "app" {
   depends_on = [module.eks]
 }
 
-###############################################################################
 # Sample deployment so the load balancer has something to route to.
 # Drop this block if you deploy your app with Helm/ArgoCD instead — but then
 # make sure the Service selector below matches your real pods.
-###############################################################################
+
 
 resource "kubernetes_deployment" "frontend" {
   metadata {
@@ -86,9 +82,8 @@ resource "kubernetes_deployment" "frontend" {
   }
 }
 
-###############################################################################
+
 # LoadBalancer Service -> provisions an AWS Network Load Balancer
-###############################################################################
 
 resource "kubernetes_service" "frontend" {
   metadata {
